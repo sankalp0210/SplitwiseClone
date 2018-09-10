@@ -1,0 +1,29 @@
+body{
+	/*background-color: #000033;*/
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 100%;
+	min-width: 100%;
+}
+.b1{
+	font-size: 100px;
+	text-decoration: underline;
+	font-weight: bold;
+}
+.start{
+	font-size: 30px;
+}
+.free{
+	font-size: 15px;
+}
+.heading{
+	font-style: #000066;
+}
+.container-fluid{
+	margin-top: 10%;
+}
+.apniclass{
+	margin-top: 100;
+	background-color: #fff;
+	border-color: #000;
+}

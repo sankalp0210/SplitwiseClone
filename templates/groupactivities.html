@@ -1,0 +1,51 @@
+{% extends 'dashlayout.html' %}
+{% block title %}{{ session.name }}{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="./../static/css/friends.css">
+{% endblock %}
+{% block lable %}Activities{% endblock %}
+{% block body %}
+
+<!-- <form method="POST"> -->
+  {% if acts %}
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for act in acts %}
+            <tr>
+              {% if act[4]!=0 %}
+                <td>{{ act[0] }}</td>
+                {% if act[1] != "Settled Up" %}
+                  {% if act[4] > 0 %}
+                    <td>You added "{{ act[1] }}".</td>
+                    <td class="owesYou"><b>You get back &#8377;{{ act[4] }} from {{act[3]}}</b></td>
+                  {% elif act[4] < 0 %}
+                    <td>{{act[3]}} added "{{ act[1] }}".</td>
+                    <td class="youOwe"><b>You owe &#8377;{{ -act[4] }}</b></td>
+                  {% endif %}
+                {% else %}
+                  {% if act[4] < 0 %}
+                    <td>You "{{ act[1] }}".</td>
+                    <td class="owesYou"><b>You paid &#8377;{{ -act[4] }} to {{act[3]}}</b></td>
+                  {% elif act[4] > 0 %}
+                    <td>{{ act[3] }} "{{ act[1] }}".</td>
+                    <td class="youOwe"><b>{{act[3]}} paid &#8377;{{ act[4] }}</b></td>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</form>
+  {% else %}
+    <p>You don't have any activities.</p>
+  {% endif %}
+{% endblock %}  

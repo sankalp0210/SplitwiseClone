@@ -1,0 +1,15 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Group_page-{{ session.name }}{% endblock %}
+{% block head %}{% endblock %}
+{% block lable %}Group{% endblock %}
+{% block lable2 %}{% endblock %}
+{% block body %}
+<form method="POST">
+	<div class="form-group">
+		<label>Email</label>
+		<input class="form-control" name="user" type="text" placeholder="Enter Email" required>
+	</div>
+	<br> 
+	<center><button class="btn btn-lg btn-success" type="submit">Add Member</button></center>
+</form>
+{% endblock %}

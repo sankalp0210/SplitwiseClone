@@ -1,0 +1,31 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Add Bill{% endblock %}
+{% block head %}{% endblock %}
+{% block label %}Transaction{% endblock %}
+{% block body %}
+<form method="POST">
+	<div class="form-group">
+		<label>Description</label>
+		<input class="form-control" name="description" value="{{ desc }}" type="text" required>
+	</div>
+	<div class="form-group">
+		<label>Amount</label>
+		<input class="form-control" name="amount" value="{{ amount }}" type="decimal" required>
+	</div>
+	<br> 
+	<div class="col-md-6">
+		<table class="table">
+			{% for member in members %}
+				<tr>
+					<td>{{ member[0] }}</td>
+					<td>{{ member[1] }}</td>
+					<td><input class="form-control" type="decimal" name="{{ member[1] }}" value="{{ am }}" required></td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<center>
+		<button class="btn btn-lg btn-success" type="submit">Add Bill</button>
+	</center>
+</form>
+{% endblock %}

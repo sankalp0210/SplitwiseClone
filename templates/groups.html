@@ -1,0 +1,33 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Groups-{{ session.name }}{% endblock %}
+{% block head %}{% endblock %}
+{% block lable %}Groups{% endblock %}
+{% block body %}
+{% if groups and groups[0][0]%}
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Group Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for group in groups %}
+          <tr>
+              <td>{{ group[1] }}</td>
+          	  <td><form method="POST">
+                <button class="btn btn btn-success" type="submit" name="group_page" value="{{ group[0] }}">-></button>
+              </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+	{% else %}
+		<p>You are not a part of any group.</p>
+	{% endif %}
+
+<form method="POST">
+   <button class="btn btn-lg btn-primary" type="submit" name="group_page" value="create">Create Group</button>
+</form>
+{% endblock %}

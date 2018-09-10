@@ -1,0 +1,58 @@
+{% extends 'dashlayout.html' %}
+{% block title %}{{ session.name }}{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="./../static/css/friends.css">
+{% endblock %}
+{% block lable %}Activities{% endblock %}
+{% block body %}
+
+<!-- <form method="POST"> -->
+  {% if acts %}
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for act in acts %}
+            <tr>
+              {% if act[0] == 'Settled Up' %}
+                {% if user == act[1] %}
+                  <td>You <b>Settled Up</b> With {{ act[6] }}</td>
+                {% else %}
+                  <td>{{ act[6] }} <b>Settled Up</b> With You</td>
+                {% endif %}
+                {% if act[3] > 0 %}
+                  <td class="youOwe"><b>You paid &#8377;{{ act[3] }}</b></td>
+                {% else %}
+                  <td class="owesYou"><b>You got &#8377;{{ -act[3] }}</b></td>
+                {% endif %} 
+              {% else %}
+                {% if user == act[1] %}
+                  <td>You added <b>"{{ act[0] }}"</b> With {{ act[6] }}.</td>
+                  {% if act[3] > 0 %}
+                    <td class="owesYou"><b>You get back &#8377;{{ act[3] }}</b></td>
+                  {% else %}
+                    <td class="youOwe"><b>You owe &#8377;{{ -act[3] }}</b></td>
+                  {% endif %}  
+                {% else %}
+                  <td>{{ act[6] }} added <b>"{{ act[0] }}"</b> With You.</td>
+                  {% if act[4] > 0 %}
+                    <td class="owesYou"><b>You get back &#8377;{{ act[4] }}</b></td>
+                  {% else %}
+                    <td class="youOwe"><b>You owe &#8377;{{ -act[4] }}</b></td>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</form>
+  {% else %}
+    <p>You don't have any activities.</p>
+  {% endif %}
+{% endblock %}

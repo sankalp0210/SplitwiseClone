@@ -1,0 +1,58 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Friends-{{ session.name }}{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="./../static/css/friends.css">
+{% endblock %}
+{% block lable %}Friends{% endblock %}
+{% block body %}
+<center>{% if amount == 0 %}
+    <h3>You are Settled up</h3>
+<!--   {% elif amount > 0 %}
+    <h3 class="owesYou"><b>You are owed &#8377;{{ amount }}</b></h3>
+  {% else %}
+    <h3 class="youOwe"><b>You owe &#8377;{{ amount }}</b></h3> -->
+{% endif %}</center>
+  {% if friends %}
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email ID</th>
+            <th>Phone</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for friend in friends %}
+            <tr>
+              <td>{{ friend[0] }}</td>
+              <td>{{ friend[1] }}</td>
+              <td>{{ friend[2] }}</td>
+              {% if friend[3] == 0 %}
+                <td>Settled up</td>
+              {% elif friend[3] > 0 %}
+                <td class="owesYou"><b>Owes you &#8377;{{ friend[3] }}</b></td>
+              {% else %}
+                <td class="youOwe"><b>You owe &#8377;{{ -friend[3] }}</b></td>
+              {% endif %}  
+              <td>
+              <form method="POST">
+               <button class="btn btn-lg btn-primary" type="submit" name="money" value="{{ friend[1] }}">+</button>
+             </form>
+              </td>
+              <td>
+                <form method="POST">
+                <button class="btn btn-lg btn-success" type="submit" name="settle" value="{{ friend[1] }}">Settle Up</button>
+              </form>
+              </td>  
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+	{% else %}
+		<p>You don't have any friends.</p>
+	{% endif %}
+
+{% endblock %}

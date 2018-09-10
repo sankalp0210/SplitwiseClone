@@ -1,0 +1,21 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Add Bill{% endblock %}
+{% block head %}{% endblock %}
+{% block label %}Transaction{% endblock %}
+{% block body %}
+<form method="POST">
+	<div class="form-group">
+		<label>Description</label>
+		<input class="form-control" name="description" type="text" placeholder="Enter a description" required>
+	</div>
+	<div class="form-group">
+		<label>Amount</label>
+		<input class="form-control" name="amount" type="decimal" placeholder="0.00" required>
+	</div>
+	<br> 
+	<center>
+		<button class="btn btn-lg btn-success" type = "submit" name="submit" value = "equal">Split Equally</button>
+		<button class="btn btn-lg btn-success" type = "submit" name="submit" value = "unequal">Split Unequally</button>
+	</center>
+</form>
+{% endblock %}

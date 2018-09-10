@@ -1,0 +1,14 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Create Groups{{ session.name }}{% endblock %}
+{% block head %}{% endblock %}
+{% block lable %}Create Groups{% endblock %}
+{% block body %}
+<form method="POST">
+	<div class="form-group">
+		<label>Group Name</label>
+		<input class="form-control" name="name" type="text" placeholder="Enter a title" required>
+	</div>
+	<br> 
+	<center><button class="btn btn-lg btn-success" type="submit">Create Group</button></center>
+</form>
+{% endblock %}

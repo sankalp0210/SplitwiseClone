@@ -1,0 +1,32 @@
+{% extends 'dashlayout.html' %}
+{% block title %}{{ session.name }}{% endblock %}
+{% block head %}<link rel="stylesheet" type="text/css" href="./../static/css/addfriends.css">{% endblock %}
+{% block lable %}Add Friends{% endblock %}
+{% block body %}
+<div class="searchbar">
+	<label for="examplesearch"><b>&nbsp;&nbsp;&nbsp;&nbsp; Search For Friend</b></label>
+	<div class="col-12 col-md-12">
+	<form class="form-inline my-2 my-lg-0 mr-lg-2" method="POST">
+		<div class="input-group">
+			<input class="form-control" type="text" name="search" placeholder="Enter Email or phone number ..."  size='120' required>
+			<span class="input-group-append">
+				<input class="btn btn-primary" type="submit" name="btn" value="Search">
+			</span>
+		</div>
+	</form>
+</div>
+</center>
+</div>
+</div>
+<br>
+{% if user %}
+	<ul>
+		{% for i in user %}
+			<li>{{ i }}</li>
+		{% endfor %}
+	</ul>
+	<form class="form-inline my-2 my-lg-0 mr-lg-2" method="POST">
+		<button class="btn btn-primary" type="submit" name="btn" value="{{user}}">Add Friend</button>
+	</form>
+{% endif %}
+{% endblock %}

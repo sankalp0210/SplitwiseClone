@@ -1,0 +1,56 @@
+{% extends 'dashlayout.html' %}
+{% block title %}Group_page-{{ session.name }}{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="./../static/css/friends.css">
+{% endblock %}
+{% block lable %}Group{% endblock %}
+{% block lable2 %}<li class="breadcrumb-item">{{ group_name }}</li>{% endblock %}
+{% block body %}
+	{% if members[1] %}
+	<div class="col-md-6">
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone Number</th>
+				<th>Amount</th>
+			</tr>
+			{% for member in members %}
+				{% if member[1] != session.email %}
+				<tr>
+					<td>{{ member[0] }}</td>
+					<td>{{ member[1] }}</td>
+					<td>{{ member[2] }}</td>
+					{% if member[3] == 0 %}
+                		<td>Settled up</td>
+		            {% elif member[3] > 0 %}
+		            	<td class="owesYou"><b>Owes you &#8377;{{ member[3]}}</b></td>
+		            {% else %}
+		            	<td class="youOwe"><b>You owe &#8377;{{ -member[3] }}</b></td>
+		            {% endif %}
+					<td><form method="POST">
+                		<button class="btn btn btn-success" type="submit" name="settle" value="{{ member[1] }}">Settle Up</button>
+              		</form></td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+	{% else %}
+		<p>You are the only one in the group.</p>
+	{% endif %}
+	<form method="POST">
+  		<button class="btn btn btn-success" type="submit" name="addMember" value="addMem">Add Member</button>
+  		{% if members[1] %}
+  			<button class="btn btn btn-success" type="submit" name="addTrans" value="addTr">Add Transaction</button>
+  			<button class="btn btn btn-success" type="submit" name="setGroup" value="settle">Settle Group</button><br><br><br>
+  			{% if comments %}
+  				{% for comment in comments %}
+  				<p><b>{{comment[0]}}</b>:- {{comment[1]}}</p>
+  				{% endfor %}
+  			{% endif %}
+  			<input type="text" name="comment" placeholder="Add a comment..." size="100"/><br><br>
+  			<button class="btn btn btn-success" type="submit" name="comment" value="addComment">Add Comment</button>
+  		{% endif %}
+  	</form>
+{% endblock %}

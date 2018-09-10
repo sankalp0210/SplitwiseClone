@@ -1,0 +1,36 @@
+{% extends 'dashlayout.html' %}
+{% block title %}{{ session.name }}{% endblock %}
+{% block head %}{% endblock %}
+{% block lable %}Friend Requests{% endblock %}
+{% block body %}
+	{% if friends %}
+		<div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email ID</th>
+            <th>Phone Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for friend in friends %}
+				    <tr>
+				    {% for info in friend %}
+					    <td>{{ info }}</td>
+				    {% endfor %}
+					  <td>
+              <form method="POST">
+                <button type="submit" class="btn btn-lg btn-primary" name ="btn" value= "{{ 
+                friend[1] }}">Accept</button>
+              </form>
+            </td>	
+				  </tr>
+				  {% endfor %}
+        </tbody>
+      </table>
+    </div>
+	{% else %}
+		<p>You don't have any friend requests.</p>
+	{% endif %}
+{% endblock %}

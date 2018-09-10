@@ -1,0 +1,14 @@
+{% extends 'dashlayout.html' %}
+{% block title %}{{ session.name }}{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+	<ul>
+		{% for i in user %}
+			<li>{{ i }}</li>
+		{% endfor %}
+	</ul>
+	<form class="form-inline my-2 my-lg-0 mr-lg-2" method="POST">
+        <button class="btn btn-primary" type="submit">Add Friend
+        </button>
+    </form>
+{% endblock %}
